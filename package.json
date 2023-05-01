@@ -1,0 +1,33 @@
+{
+  "name": "frankenserver",
+  "version": "1.0.0",
+  "description": "A multipurpose server, The Frankenserver!",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ebriopes/Frankenserver.git"
+  },
+  "keywords": [
+    "backend",
+    "server"
+  ],
+  "author": "ebriopes",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Ebriopes/Frankenserver/issues"
+  },
+  "homepage": "https://github.com/Ebriopes/Frankenserver#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "serve-index": "^1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
