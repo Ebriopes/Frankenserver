@@ -1,35 +1,60 @@
 {
-  "name": "frankenserver",
-  "version": "1.0.0",
-  "description": "A multipurpose server, The Frankenserver!",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Ebriopes/Frankenserver.git"
-  },
-  "keywords": [
-    "backend",
-    "server"
-  ],
-  "author": "ebriopes",
-  "license": "GPL-3.0",
-  "bugs": {
-    "url": "https://github.com/Ebriopes/Frankenserver/issues"
-  },
-  "homepage": "https://github.com/Ebriopes/Frankenserver#readme",
-  "dependencies": {
-    "body-parser": "^1.20.2",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "serve-index": "^1.9.1"
-  },
-  "devDependencies": {
-    "@types/serve-index": "^1.9.1",
-    "nodemon": "^2.0.22"
-  }
+   "name": "frankenserver",
+   "version": "1.0.0",
+   "description": "A multipurpose server, The Frankenserver!",
+   "main": "index.js",
+   "scripts": {
+      "tsc": "tsc",
+      "start": "nodemon ./src/index.ts",
+      "dev": "set debug=* && ts-node-dev --respawn --transpile-only ./src/index.ts",
+      "prod": "tsc && node ./build/app.js",
+      "migration:run": "typeorm-ts-node-esm migration:run -d ./src/database/data-source.ts",
+      "typeorm": "typeorm-ts-node-esm"
+   },
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/Ebriopes/Frankenserver.git"
+   },
+   "keywords": [
+      "backend",
+      "server"
+   ],
+   "author": "ebriopes",
+   "license": "GPL-3.0",
+   "bugs": {
+      "url": "https://github.com/Ebriopes/Frankenserver/issues"
+   },
+   "homepage": "https://github.com/Ebriopes/Frankenserver#readme",
+   "dependencies": {
+      "bcryptjs": "^2.4.3",
+      "body-parser": "^1.20.2",
+      "class-validator": "^0.14.0",
+      "cookie-parser": "^1.4.6",
+      "cors": "^2.8.5",
+      "dotenv": "^16.0.3",
+      "express": "^4.18.2",
+      "helmet": "^7.0.0",
+      "jsonwebtoken": "^9.0.2",
+      "mariadb": "^3.2.0",
+      "mysql": "^2.18.1",
+      "pg": "^8.4.0",
+      "reflect-metadata": "^0.1.13",
+      "serve-index": "^1.9.1",
+      "ts-node-dev": "^2.0.0",
+      "typeorm": "0.3.17"
+   },
+   "devDependencies": {
+      "@types/bcryptjs": "^2.4.4",
+      "@types/body-parser": "^1.19.3",
+      "@types/cookie-parser": "^1.4.4",
+      "@types/cors": "^2.8.14",
+      "@types/express": "^4.17.17",
+      "@types/helmet": "^4.0.0",
+      "@types/jsonwebtoken": "^9.0.3",
+      "@types/node": "^16.18.57",
+      "@types/serve-index": "^1.9.1",
+      "nodemon": "^2.0.22",
+      "ts-node": "^10.8.0",
+      "typescript": "4.5.2"
+   }
 }
