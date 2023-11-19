@@ -58,6 +58,12 @@ export class User extends BaseEntity {
     return compareSync(unencryptedPassword, this.password);
   }
 
+  async getPermissions() {
+    return await Permissions.query("SELECT * WHERE bit & :permission", [
+      this.permission,
+    ]);
+  }
+
   savePassword(password: string) {
     this.password = hashSync(password, HASH_SALT);
   }

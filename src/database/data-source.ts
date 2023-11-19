@@ -1,14 +1,12 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
 import { DB_ENV } from "../config";
-import { User } from "../entity/User";
+import { Permissions, Roles, User, UserRoles } from "../entity";
 import MIGRATIONS from "../migrations";
 
 export const AppDataSource = new DataSource({
   ...DB_ENV,
-  synchronize: true,
-  logging: false,
-  entities: [User],
+  entities: [User, Permissions, Roles, UserRoles],
   migrations: MIGRATIONS,
   // migrationsTableName: "initial_migration",
   subscribers: [],
