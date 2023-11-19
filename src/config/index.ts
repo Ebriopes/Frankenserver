@@ -4,7 +4,7 @@ import { DataSourceOptions } from "typeorm";
 const ENVIRONMENT = (process.env.NODE_ENV = process.env.NODE_ENV || "dev");
 const PORT = process.env.PORT || 3000;
 
-const HASH_SALT = Number(process.env.HASH_SALT) || 0;
+const HASH_SALT = Number(process.env.HASH_SALT) || 10;
 const COOKIE_SECRET = process.env.COOKIE_SECRET || "";
 
 const TOKEN = {
@@ -21,6 +21,8 @@ const DB_ENV: DataSourceOptions = {
   username: process.env.DB_USERNAME || "anonymous",
   password: process.env.DB_PASS || "",
   database: process.env.DB_DATABASE || "test",
+  synchronize: ENVIRONMENT !== "production",
+  logging: ENVIRONMENT === "dev",
 };
 
 const SECURE_COOKIE_OPTIONS = {
@@ -28,6 +30,11 @@ const SECURE_COOKIE_OPTIONS = {
   signed: true,
   secure: ENVIRONMENT === "production",
 };
+
+enum ROLES {
+  ADMIN = "ADMIN",
+  USER = "USER",
+}
 
 export {
   PORT,
@@ -37,4 +44,5 @@ export {
   HASH_SALT,
   COOKIE_SECRET,
   SECURE_COOKIE_OPTIONS,
+  ROLES,
 };
