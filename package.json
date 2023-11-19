@@ -9,6 +9,7 @@
       "dev": "set debug=* && ts-node-dev --respawn --transpile-only ./src/index.ts",
       "prod": "tsc && node ./build/app.js",
       "migration:run": "typeorm-ts-node-esm migration:run -d ./src/database/data-source.ts",
+      "migration:revert": "typeorm-ts-node-esm migration:revert -d ./src/database/data-source.ts",
       "typeorm": "typeorm-ts-node-esm"
    },
    "repository": {
