@@ -17,7 +17,7 @@ class UserController {
   static listAll = async (req: Request, res: Response) => {
     //Get users from database
     const users = await User.find({
-      select: ["id", "username", "role"], //We don't want to send the passwords on response
+      select: ["id", "username", "permission"], //We don't want to send the passwords on response
     });
 
     //Send the users object
@@ -32,7 +32,7 @@ class UserController {
       //Get the user from database
       const user = await User.findOneOrFail({
         where: { id },
-        select: ["id", "username", "role"], //We don't want to send the password on response
+        select: ["id", "username", "permission"], //We don't want to send the password on response
       });
 
       res.status(200).json(user);
@@ -44,18 +44,30 @@ class UserController {
   static newUser = async (req: Request, res: Response) => {
     try {
       //Get parameters from the body
-      const { username, password, role } = req.body;
+      const {
+        username,
+        password,
+        email,
+        nickName,
+        firstName,
+        lastName,
+        permission,
+      } = req.body;
       const user = new User();
 
       user.username = username;
-      user.role = role;
+      user.nickName = nickName ?? username;
+      user.permission = permission;
+      user.email = email;
+      user.firstName = firstName;
+      user.lastName = lastName;
       user.savePassword(password);
 
       //Validate if the parameters are ok
       await validate(user);
 
       //Hash the password, to securely store on DB
-      user.hashPassword();
+      // user.hashPassword();
 
       //Try to save. If fails, the username is already in use
       await user.save();
@@ -74,14 +86,14 @@ class UserController {
       const id: number = +req.params.id;
 
       //Get values from the body
-      const { username, role } = req.body;
+      const { username, permission } = req.body;
 
       //Try to find user on database
       const user = await User.findOneOrFail({ where: { id } });
 
       //Validate the new values on model
       user.username = username;
-      user.role = role;
+      user.permission = permission;
 
       await validate(user);
 

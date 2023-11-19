@@ -1,0 +1,26 @@
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import { UserRoles } from "./UserRoles";
+
+@Entity()
+export class Roles extends BaseEntity {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column({ length: 64 })
+  name: string;
+
+  @Column({ nullable: true })
+  platform: string;
+
+  @Column()
+  permission: number;
+
+  @OneToMany(() => UserRoles, (userRoles) => userRoles.role, { cascade: true })
+  userRoles: UserRoles[];
+}

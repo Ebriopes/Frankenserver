@@ -6,10 +6,13 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   BaseEntity,
+  OneToOne,
 } from "typeorm";
 import { compareSync, hashSync } from "bcryptjs";
 import { Length } from "class-validator";
 import { HASH_SALT } from "../config";
+import { Permissions } from "./Permissions";
+import { UserRoles } from "./UserRoles";
 
 @Entity()
 @Unique(["username"])
@@ -37,8 +40,11 @@ export class User extends BaseEntity {
   @Column()
   email: string;
 
+  @OneToOne(() => UserRoles, (userRoles) => userRoles.user, { nullable: true })
+  roles: UserRoles;
+
   @Column({ nullable: true })
-  role: string;
+  permission: number;
 
   @Column()
   @CreateDateColumn()
@@ -50,10 +56,6 @@ export class User extends BaseEntity {
 
   checkIfUnencryptedPasswordIsValid(unencryptedPassword: string) {
     return compareSync(unencryptedPassword, this.password);
-  }
-
-  hashPassword() {
-    this.password = hashSync(this.password, HASH_SALT);
   }
 
   savePassword(password: string) {
