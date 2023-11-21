@@ -20,9 +20,7 @@ router.get("/", (_, res) => {
 router.use("/login", loginRoute);
 router.use("/token/refresh", AuthController.refreshToken);
 
-router.use("", verifyJwt);
+router.use("", verifyJwt, checkRoles());
 router.use("/users", userRoute);
-
-router.use("", checkRoles);
 
 export default router;

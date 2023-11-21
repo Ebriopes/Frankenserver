@@ -25,14 +25,21 @@ class AuthController {
 
       // Create new refresh token to avoid request login to users
       const refreshToken = sign(
-        { userId: user.id, username: user.username },
+        {
+          userId: user.id,
+          username: user.username,
+        },
         TOKEN.refreshSecrete,
         { expiresIn: TOKEN.refreshExpiresIn }
       );
 
       //Sing JWT, valid for 1 hour
       const token = sign(
-        { userId: user.id, username: user.username },
+        {
+          userId: user.id,
+          username: user.username,
+          permission: user.permission,
+        },
         TOKEN.secret,
         { expiresIn: TOKEN.expiresIn }
       );
@@ -51,6 +58,7 @@ class AuthController {
   };
 
   static logout = (req: Request, res: Response, next: NextFunction) => {
+    delete res.locals.jwtPayload;
     res.clearCookie("access_token").clearCookie("refresh_token");
   };
 
