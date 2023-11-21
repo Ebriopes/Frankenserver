@@ -58,10 +58,13 @@ export class User extends BaseEntity {
     return compareSync(unencryptedPassword, this.password);
   }
 
-  async getPermissions() {
-    return await Permissions.query("SELECT * WHERE bit & :permission", [
-      this.permission,
-    ]);
+  async getPermissions(): Promise<{ name: string }[]> {
+    const permission = this.roles?.role?.permission;
+
+    return await Permissions.query(
+      "SELECT name FROM permissions WHERE permissions.bit & ?",
+      [permission]
+    );
   }
 
   savePassword(password: string) {
