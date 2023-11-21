@@ -53,6 +53,7 @@ class UserController {
         lastName,
         permission,
       } = req.body;
+
       const user = new User();
 
       user.username = username;
@@ -61,13 +62,11 @@ class UserController {
       user.email = email;
       user.firstName = firstName;
       user.lastName = lastName;
-      user.savePassword(password);
 
       //Validate if the parameters are ok
       await validate(user);
-
       //Hash the password, to securely store on DB
-      // user.hashPassword();
+      await user.savePassword(password);
 
       //Try to save. If fails, the username is already in use
       await user.save();
@@ -80,6 +79,7 @@ class UserController {
     }
   };
 
+  // TODO Continue how manage an existing user
   static editUser = async (req: Request, res: Response) => {
     try {
       //Get the ID from the url
@@ -98,7 +98,7 @@ class UserController {
       await validate(user);
 
       //Try to safe, if fails, that means username already in use
-      user.save();
+      await user.save();
       //After all send a 204 (no content, but accepted) response
       res.status(204).send();
     } catch (error) {
