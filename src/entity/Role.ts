@@ -8,7 +8,7 @@ import {
 import { UserRoles } from "./UserRoles";
 
 @Entity()
-export class Roles extends BaseEntity {
+export class Role extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 

@@ -1,5 +1,5 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
-import { Roles, User, UserRoles } from "../entity";
+import { Role, User, UserRoles } from "../entity";
 
 export class CreateRoles1700349987985 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -7,15 +7,15 @@ export class CreateRoles1700349987985 implements MigrationInterface {
     const user = (await User.findOneBy({ username: "user" }))!;
     const manager = (await User.findOneBy({ username: "manager" }))!;
 
-    const roleUser = new Roles();
+    const roleUser = new Role();
     roleUser.name = "USER";
     roleUser.permission = 1;
 
-    const roleManager = new Roles();
+    const roleManager = new Role();
     roleManager.name = "MANAGER";
     roleManager.permission = 3;
 
-    const roleAdmin = new Roles();
+    const roleAdmin = new Role();
     roleAdmin.name = "ADMIN";
     roleAdmin.permission = 15;
 
@@ -33,7 +33,7 @@ export class CreateRoles1700349987985 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    const roles = await Roles.find();
+    const roles = await Role.find();
     const userRoles = await UserRoles.find();
 
     await Promise.all(userRoles.map((userRole) => userRole.remove()));

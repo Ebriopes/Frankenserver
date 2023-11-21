@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { User } from "./User";
-import { Roles } from "./Roles";
+import { Role } from "./Role";
 
 @Entity()
 export class UserRoles extends BaseEntity {
@@ -18,6 +18,6 @@ export class UserRoles extends BaseEntity {
   @JoinColumn()
   user: User;
 
-  @ManyToOne(() => Roles, (roles) => roles.userRoles)
-  role: Roles;
+  @ManyToOne(() => Role, (roles) => roles.userRoles)
+  role: Role;
 }
