@@ -22,7 +22,7 @@ const DB_ENV: DataSourceOptions = {
   password: process.env.DB_PASS || "",
   database: process.env.DB_DATABASE || "test",
   synchronize: ENVIRONMENT !== "production",
-  logging: ENVIRONMENT === "dev",
+  logging: ENVIRONMENT === "log",
 };
 
 const SECURE_COOKIE_OPTIONS = {
