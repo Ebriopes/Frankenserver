@@ -1,5 +1,7 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
-import { Role, User, UserRoles } from "../entity";
+import { User } from "../entity/User";
+import { Role } from "../entity/Role";
+import { UserRoles } from "../entity/UserRoles";
 
 export class CreateRoles1700349987985 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {

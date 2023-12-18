@@ -1,6 +1,9 @@
 import { NextFunction, Request, Response } from "express";
-import { JsonWebTokenError, verify } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
+
 import { TOKEN } from "../config";
+
+const { JsonWebTokenError, verify } = jwt;
 
 export const verifyJwt = (req: Request, res: Response, next: NextFunction) => {
   //Try to validate the token and get data

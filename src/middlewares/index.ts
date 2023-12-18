@@ -2,8 +2,10 @@ import { Router } from "express";
 // import helmet from "helmet";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import { json, urlencoded } from "body-parser";
+import bp from "body-parser";
 import { COOKIE_SECRET } from "../config";
+
+const { json, urlencoded } = bp;
 
 export * from "./checkRoles";
 export * from "./verifyJwt";

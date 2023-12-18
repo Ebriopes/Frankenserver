@@ -1,10 +1,12 @@
 import { NextFunction, Request, Response } from "express";
-import { JsonWebTokenError, sign, verify } from "jsonwebtoken";
+import { EntityNotFoundError } from "typeorm";
 import { validate } from "class-validator";
+import jwt from "jsonwebtoken";
 
 import { SECURE_COOKIE_OPTIONS, TOKEN } from "../config";
 import { User } from "../entity/User";
-import { EntityNotFoundError } from "typeorm";
+
+const { JsonWebTokenError, sign, verify } = jwt;
 
 class AuthController {
   static login = async (req: Request, res: Response, next: NextFunction) => {
