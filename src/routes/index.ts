@@ -20,7 +20,8 @@ router.get("/", (_, res) => {
 router.use("/login", loginRoute);
 router.use("/token/refresh", AuthController.refreshToken);
 
-router.use("", verifyJwt, checkRoles());
+router.use("", verifyJwt, checkRoles);
 router.use("/users", userRoute);
+// TODO When we complete users, we need continue with the "recibos"
 
 export default router;
