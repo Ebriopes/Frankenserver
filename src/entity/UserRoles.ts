@@ -5,6 +5,7 @@ import {
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
+  Relation,
 } from "typeorm";
 import { User } from "./User";
 import { Role } from "./Role";
@@ -16,8 +17,8 @@ export class UserRoles extends BaseEntity {
 
   @OneToOne(() => User, (user) => user.roles)
   @JoinColumn()
-  user: User;
+  user: Relation<User>;
 
   @ManyToOne(() => Role, (roles) => roles.userRoles)
-  role: Role;
+  role: Relation<Role>;
 }

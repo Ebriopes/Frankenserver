@@ -7,8 +7,9 @@ import {
   UpdateDateColumn,
   BaseEntity,
   OneToOne,
+  Relation,
 } from "typeorm";
-import { compareSync, hashSync } from "bcryptjs";
+import { compareSync, hashSync } from "bcrypt";
 import { Length } from "class-validator";
 import { HASH_SALT } from "../config";
 import { Permissions } from "./Permissions";
@@ -41,7 +42,7 @@ export class User extends BaseEntity {
   email: string;
 
   @OneToOne(() => UserRoles, (userRoles) => userRoles.user, { nullable: true })
-  roles: UserRoles;
+  roles: Relation<UserRoles>;
 
   @Column({ nullable: true })
   permission: number;

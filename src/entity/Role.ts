@@ -4,6 +4,7 @@ import {
   Entity,
   OneToMany,
   PrimaryGeneratedColumn,
+  Relation,
 } from "typeorm";
 import { UserRoles } from "./UserRoles";
 
@@ -22,5 +23,5 @@ export class Role extends BaseEntity {
   permission: number;
 
   @OneToMany(() => UserRoles, (userRoles) => userRoles.role, { cascade: true })
-  userRoles: UserRoles[];
+  userRoles: Relation<UserRoles[]>;
 }
