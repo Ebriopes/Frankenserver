@@ -3,6 +3,7 @@ import { Router } from "express";
 import publicRoute from "./public";
 import loginRoute from "./login";
 import userRoute from "./user";
+import docsRoute from "./docs";
 import { checkRoles, verifyJwt } from "../middlewares";
 import { AuthController } from "../controllers";
 
@@ -19,6 +20,7 @@ router.get("/", (_, res) => {
 
 router.use("/login", loginRoute);
 router.use("/token/refresh", AuthController.refreshToken);
+router.use(docsRoute);
 
 router.use("", verifyJwt, checkRoles);
 router.use("/users", userRoute);
